@@ -48,7 +48,7 @@ Or explore directly with:
 docker run -it --rm caml_dev_manual CAML/main/camldataservice
 ```
  
-### Join us! Develop a cool feature
+## Join us! Develop a cool feature
 * **Seems best**: use a toolchain like vscode. you can attach to the container and do development that way. vscode can handle most of this for you: in the vscode UI:
   * "attach to running container" (select caml_dev)
   * "install all" at the vscode prompts for go-outline and gopls 
@@ -69,13 +69,19 @@ CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o camldataservice .
 ## Basic elements of CAML repo
 
 * Continuous Audit Metrics Catalog
-    * The catalog published by Cloud Security Alliance of metrics 
-    * TODO: (may be linked from an external repository)
-* Inject processing to convert the catalog into CAML specific structures.       
-    * The intention is to make this is lite as possible. 
+    * The catalog published by Cloud Security Alliance of metrics
+    * TBD: this is the primary component to move to a CSA repo 
+    * There exists the working group spreadsheet (private)
+    * There exists the CSA published v1 metric catalog: https://cloudsecurityalliance.org/artifacts/the-continuous-audit-metrics-catalog/ 
+    * Within this repo is the draft structured YAML file at configFiles/globalConfig/metricsModel.yaml 
+    * Currently this is **not used** by the codebase. Instead src/main/main.go reads: 
+    ** configFiles/globalConfig/controls.json
+    ** configFiles/globalConfig/metrics.json
+* (abandoned?) Inject processing to convert the catalog into CAML specific structures.       
+    * This creates JSON instead of YAML
+    * 
     * see etc/appscript.js
-    * controls.json
-    * metrics.json
+    * creates: ccm_controls.json & ccm_metrics.json
 * YugabyteDB SQL database. measurement storage.
     * yb-standalone
     * used for storing measurements and computed metrics
